@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J2Download - Universal Social Media Downloader</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-download"></i>
+                <h1>J2Download</h1>
+            </div>
+            <p class="subtitle">Universal Social Media Downloader</p>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                <i class="fas fa-check-circle" style="color: #4CAF50;"></i> 
+                Supports 30+ platforms | No watermark | Free
+            </p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="url-input-wrapper">
+                    <i class="fas fa-link input-icon"></i>
+                    <input 
+                        type="url" 
+                        id="urlInput" 
+                        placeholder="Paste video/audio URL here..."
+                        autofocus
+                    >
+                    <button id="downloadBtn" class="btn-primary">
+                        <i class="fas fa-arrow-right"></i> Download
+                    </button>
+                </div>
+                <div class="quick-examples">
+                    <span>Quick examples:</span>
+                    <button class="example-btn" data-url="https://www.tiktok.com/@khaby.lame/video/7089929457852886319">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </button>
+                    <button class="example-btn" data-url="https://www.instagram.com/reel/CxXxXxXxXxX/">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                    <button class="example-btn" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </button>
+                    <button class="example-btn" data-url="https://x.com/elonmusk/status/1234567890">
+                        <i class="fab fa-twitter"></i> Twitter/X
+                    </button>
+                </div>
+                <div style="margin-top: 12px; font-size: 12px; color: var(--text-secondary);">
+                    <i class="fas fa-code"></i> API: <code style="background: var(--bg-input); padding: 2px 8px; border-radius: 4px;">GET /download?url=...</code>
+                </div>
+            </div>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Processing your request...</p>
+                <small>This may take a few seconds</small>
+            </div>
+
+            <div id="result" class="result hidden">
+                <div class="result-header">
+                    <span class="platform-badge" id="platformBadge">TikTok</span>
+                    <button id="clearBtn" class="btn-clear">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="media-preview">
+                        <img id="thumbnail" src="" alt="Thumbnail" class="thumbnail">
+                        <div class="media-info">
+                            <h3 id="videoTitle">Title</h3>
+                            <p id="videoAuthor"><i class="fas fa-user"></i> Author</p>
+                            <p id="videoDuration"><i class="fas fa-clock"></i> Duration: 0s</p>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <i class="fas fa-eye"></i>
+                            <span id="viewsCount">0</span>
+                            <small>Views</small>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-heart"></i>
+                            <span id="likesCount">0</span>
+                            <small>Likes</small>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-comment"></i>
+                            <span id="commentsCount">0</span>
+                            <small>Comments</small>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-share"></i>
+                            <span id="sharesCount">0</span>
+                            <small>Shares</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="download-section">
+                    <h4><i class="fas fa-download"></i> Download Options</h4>
+                    <div id="downloadOptions" class="download-options">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+
+                <div class="all-medias">
+                    <h4><i class="fas fa-list"></i> All Media Files</h4>
+                    <div id="allMedias" class="medias-list">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="error" class="error hidden">
+                <i class="fas fa-exclamation-circle"></i>
+                <p id="errorMessage">Error message</p>
+            </div>
+
+            <div class="supported-platforms">
+                <h4><i class="fas fa-globe"></i> Supported Platforms</h4>
+                <div class="platform-tags">
+                    <span><i class="fab fa-tiktok"></i> TikTok</span>
+                    <span><i class="fab fa-youtube"></i> YouTube</span>
+                    <span><i class="fab fa-facebook"></i> Facebook</span>
+                    <span><i class="fab fa-instagram"></i> Instagram</span>
+                    <span><i class="fab fa-twitter"></i> Twitter/X</span>
+                    <span><i class="fab fa-threads"></i> Threads</span>
+                    <span><i class="fab fa-vimeo"></i> Vimeo</span>
+                    <span><i class="fab fa-soundcloud"></i> SoundCloud</span>
+                    <span><i class="fab fa-spotify"></i> Spotify</span>
+                    <span><i class="fab fa-reddit"></i> Reddit</span>
+                    <span><i class="fab fa-pinterest"></i> Pinterest</span>
+                    <span><i class="fab fa-twitch"></i> Twitch</span>
+                    <span><i class="fab fa-linkedin"></i> LinkedIn</span>
+                    <span><i class="fab fa-telegram"></i> Telegram</span>
+                    <span><i class="fab fa-bilibili"></i> Bilibili</span>
+                    <span><i class="fas fa-video"></i> Douyin</span>
+                    <span><i class="fas fa-image"></i> Xiaohongshu</span>
+                    <span><i class="fas fa-film"></i> Kuaishou</span>
+                    <span><i class="fas fa-share-alt"></i> Weibo</span>
+                    <span><i class="fab fa-vk"></i> VK</span>
+                    <span><i class="fas fa-play-circle"></i> Rumble</span>
+                    <span><i class="fas fa-music"></i> Kwai</span>
+                    <span><i class="fas fa-star"></i> Likee</span>
+                    <span><i class="fas fa-crop-alt"></i> CapCut</span>
+                    <span><i class="fas fa-cloud"></i> Streamable</span>
+                    <span><i class="fas fa-images"></i> Imgur</span>
+                    <span><i class="fab fa-tumblr"></i> Tumblr</span>
+                    <span><i class="fas fa-headphones"></i> Mixcloud</span>
+                    <span><i class="fas fa-music"></i> Bandcamp</span>
+                    <span><i class="fas fa-camera"></i> Snapchat</span>
+                    <span><i class="fas fa-play"></i> Dailymotion</span>
+                    <span><i class="fas fa-leaf"></i> Lemon8</span>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by J2Download API | Free & Open Source</p>
+            <p class="footer-small">Download videos and audio from 30+ social media platforms</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
